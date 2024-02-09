@@ -1,5 +1,6 @@
 import 'package:exemple_drower_angorguesa/paginas/pizza.dart';
 import 'package:exemple_drower_angorguesa/paginas/primera_pagina.dart';
+import 'package:exemple_drower_angorguesa/paginas/listasillas.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -17,6 +18,7 @@ class Aplicacion extends StatelessWidget {
       routes: {
         "/primera_pagina": (context) => PrimeraPagina(),
         "/pizza": (context) => pizza(),
+        "/listasillas":(context) => Listasillas(),
       },
     );
   }

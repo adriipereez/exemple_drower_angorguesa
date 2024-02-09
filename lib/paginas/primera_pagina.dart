@@ -10,7 +10,14 @@ class PrimeraPagina extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 177, 175, 171),
-        title: Text("Página Principal"),
+        title: Text(
+          "Página principal",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontFamily: 'Roboto',
+            color: Colors.white,
+          ),
+        ),
       ),
       drawer: Drawer(
         child: Column(
@@ -25,14 +32,21 @@ class PrimeraPagina extends StatelessWidget {
               leading: Icon(Icons.home),
               title: Text("Primera Página"),
               onTap: () {
-                Navigator.pushNamed(context, "/primera_pagina");
+                 Navigator.pushReplacementNamed(context, "/primera_pagina");
               },
             ),
             ListTile(
               leading: Icon(Icons.post_add),
               title: Text("Anuncio"),
               onTap: () {
-                Navigator.pushNamed(context, "/pizza");
+                 Navigator.pushReplacementNamed(context, "/pizza");
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.add_shopping_cart),
+              title: Text("Lista Sillas"),
+              onTap: () {
+                Navigator.pushReplacementNamed(context, "/listasillas");
               },
             ),
           ],
@@ -42,16 +56,16 @@ class PrimeraPagina extends StatelessWidget {
         child: Container(
           height: MediaQuery.of(context).size.height,
           color: Color.fromARGB(96, 241, 181, 89),
-          child: Column(
+          child: 
+          Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
                 "PAGINA PRINCIPAL",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontStyle: FontStyle
-                      .italic, 
-                  fontSize: 24, 
+                  fontStyle: FontStyle.italic,
+                  fontSize: 24,
                 ),
               ),
               SizedBox(
