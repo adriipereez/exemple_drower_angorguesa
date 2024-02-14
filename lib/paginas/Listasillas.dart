@@ -1,7 +1,26 @@
+import 'package:exemple_drower_angorguesa/data/DataBase.dart';
+import 'package:exemple_drower_angorguesa/main.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 
-class Listasillas extends StatelessWidget {
-  const Listasillas({super.key});
+class Listasillas extends StatefulWidget {
+
+  Listasillas({super.key});
+
+  @override
+  State<Listasillas> createState() => _ListasillasState();
+}
+
+class _ListasillasState extends State<Listasillas> {
+  DataBase bd = DataBase();
+  final _boxdeSillas = Hive.box("adri");
+
+  @override
+  void initState(){
+    print(_boxdeSillas.get("adri"));
+    if(_boxdeSillas.get("adri") != null){bd.cargardatos();}
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +71,26 @@ class Listasillas extends StatelessWidget {
       ),
       backgroundColor: Color.fromARGB(96, 241, 181, 89),
       body: Column(
-               
+        children: [
+          Center(
+            child: SingleChildScrollView(
+              child: DataTable(
+                columns: [
+                  DataColumn(label: Text('Nombre', style: TextStyle(fontWeight: FontWeight.bold),),),
+                  DataColumn(label: Text('Descripción', style: TextStyle(fontWeight: FontWeight.bold),)),
+                  DataColumn(label: Text('Precio', style: TextStyle(fontWeight: FontWeight.bold),)),
+                ],
+                rows: bd.listaSillas.map((silla) => DataRow(
+                  cells: [  
+                    DataCell(Text(silla.nombre)),
+                    DataCell(Text(silla.descripcion)),
+                    DataCell(Text('\$ ${silla.precio.toString()}')),
+                  ],
+                )).toList(),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

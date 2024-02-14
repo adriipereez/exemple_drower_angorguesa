@@ -1,9 +1,32 @@
-
+import 'package:exemple_drower_angorguesa/data/DataBase.dart';
+import 'package:exemple_drower_angorguesa/main.dart';
 import 'package:exemple_drower_angorguesa/paginas/listasillas.dart';
+import 'package:exemple_drower_angorguesa/paginas/Silla.dart';
 import 'package:flutter/material.dart';
 
-class pizza extends StatelessWidget {
-  const pizza({super.key});
+class pizza extends StatefulWidget {
+  pizza({super.key});
+
+  @override
+  State<pizza> createState() => _pizzaState();
+}
+
+class _pizzaState extends State<pizza> {
+  DataBase bd = DataBase();
+
+  TextEditingController nombreController = TextEditingController();
+  TextEditingController descripcionController = TextEditingController();
+  TextEditingController precioController = TextEditingController();
+
+  void agregarSillaALista() {
+    String nombreSilla = nombreController.text;
+    String descripcionSilla = descripcionController.text;
+    double precioSilla = double.parse(precioController.text);
+    bd.listaSillas.add(Silla(
+        nombre: nombreSilla,
+        descripcion: descripcionSilla,
+        precio: precioSilla));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -80,18 +103,21 @@ class pizza extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     TextField(
+                      controller: nombreController,
                       decoration: InputDecoration(
                         labelText: 'Nombre de la silla',
                       ),
                     ),
                     SizedBox(height: 16.0),
                     TextField(
+                      controller: descripcionController,
                       decoration: InputDecoration(
                         labelText: 'Descripción',
                       ),
                     ),
                     SizedBox(height: 16.0),
                     TextField(
+                      controller: precioController,
                       decoration: InputDecoration(
                         labelText: 'Precio',
                       ),
@@ -105,19 +131,21 @@ class pizza extends StatelessWidget {
           Center(
             child: ElevatedButton(
               onPressed: () {
-                Navigator.pop(context);
+                agregarSillaALista(); // Agregar la nueva silla a la lista
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => Listasillas(),
                   ),
                 );
-              },  
+              },
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
               ),
-              child: Text("Enviar",
-              style: TextStyle(color: Colors.white),),
+              child: Text(
+                "Enviar",
+                style: TextStyle(color: Colors.white),
+              ),
             ),
           ),
         ],

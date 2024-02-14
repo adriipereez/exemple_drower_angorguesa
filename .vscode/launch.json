@@ -4,6 +4,7 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+        
         {
             "name": "$RRL8DAL",
             "cwd": "$Recycle.Bin\\S-1-5-21-1916565683-3255793437-3250947268-1001\\$RRL8DAL",
