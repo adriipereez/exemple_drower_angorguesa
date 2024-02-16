@@ -1,3 +1,5 @@
+import 'package:exemple_drower_angorguesa/componentes/appbarPers.dart';
+import 'package:exemple_drower_angorguesa/componentes/drawePers.dart';
 import 'package:exemple_drower_angorguesa/data/DataBase.dart';
 import 'package:exemple_drower_angorguesa/main.dart';
 import 'package:exemple_drower_angorguesa/paginas/listasillas.dart';
@@ -18,63 +20,23 @@ class _pizzaState extends State<pizza> {
   TextEditingController descripcionController = TextEditingController();
   TextEditingController precioController = TextEditingController();
 
-  void agregarSillaALista() {
-    String nombreSilla = nombreController.text;
-    String descripcionSilla = descripcionController.text;
-    double precioSilla = double.parse(precioController.text);
-    bd.listaSillas.add(Silla(
-        nombre: nombreSilla,
-        descripcion: descripcionSilla,
-        precio: precioSilla));
+   agregarSillaALista() {
+    bd.cargarDatos();
+    setState(() {
+      bd.listaSillas.add([
+        nombreController.text,
+        descripcionController.text,
+        precioController.text
+      ]);
+    });
+    bd.actualizarDatos(); // Guarda los cambios en Hive
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 177, 175, 171),
-        title: Text(
-          "Subir Anuncio Silla",
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontFamily: 'Roboto',
-            color: Colors.white,
-          ),
-        ),
-      ),
-      drawer: Drawer(
-        child: Column(
-          children: [
-            DrawerHeader(
-              child: Icon(
-                Icons.chair,
-                size: 48,
-              ),
-            ),
-            ListTile(
-              leading: Icon(Icons.home),
-              title: Text("Primera Página"),
-              onTap: () {
-                Navigator.pushReplacementNamed(context, "/primera_pagina");
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.post_add),
-              title: Text("Anuncio"),
-              onTap: () {
-                Navigator.pushReplacementNamed(context, "/pizza");
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.add_shopping_cart),
-              title: Text("Lista Sillas"),
-              onTap: () {
-                Navigator.pushReplacementNamed(context, "/listasillas");
-              },
-            ),
-          ],
-        ),
-      ),
+      appBar: appBarPers(titleText: "Subir Anuncio Silla",),
+      drawer:drawePers(),
       backgroundColor: Color.fromARGB(96, 241, 181, 89),
       body: Column(
         children: [

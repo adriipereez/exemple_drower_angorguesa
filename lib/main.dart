@@ -8,9 +8,8 @@ import 'package:hive_flutter/adapters.dart';
 
 void main() async {
   await Hive.initFlutter();
-  var box = await Hive.openBox("adri");
+  var juandiego = await Hive.openBox("adri");
   runApp(const Aplicacion());
-
 }
 
 class Aplicacion extends StatelessWidget {

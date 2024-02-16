@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
+import 'package:exemple_drower_angorguesa/componentes/appbarPers.dart';
+import 'package:exemple_drower_angorguesa/componentes/drawePers.dart';
 import 'package:flutter/material.dart';
 
 class PrimeraPagina extends StatelessWidget {
@@ -8,50 +10,8 @@ class PrimeraPagina extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 177, 175, 171),
-        title: Text(
-          "Página principal",
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontFamily: 'Roboto',
-            color: Colors.white,
-          ),
-        ),
-      ),
-      drawer: Drawer(
-        child: Column(
-          children: [
-            DrawerHeader(
-              child: Icon(
-                Icons.chair,
-                size: 48,
-              ),
-            ),
-            ListTile(
-              leading: Icon(Icons.home),
-              title: Text("Primera Página"),
-              onTap: () {
-                 Navigator.pushReplacementNamed(context, "/primera_pagina");
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.post_add),
-              title: Text("Anuncio"),
-              onTap: () {
-                 Navigator.pushReplacementNamed(context, "/pizza");
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.add_shopping_cart),
-              title: Text("Lista Sillas"),
-              onTap: () {
-                Navigator.pushReplacementNamed(context, "/listasillas");
-              },
-            ),
-          ],
-        ),
-      ),
+      appBar: appBarPers(titleText: "Págin Principal",),
+      drawer: drawePers(),
       body: Expanded(
         child: Container(
           height: MediaQuery.of(context).size.height,
